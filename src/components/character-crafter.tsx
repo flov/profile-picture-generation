@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { UploadImage } from "./ui/upload-image";
 import { SelectGender } from "./ui/select-gender";
-import { YourProfilePictures } from "./your-characters";
+import { YourProfilePictures } from "./your-profile-pictures";
 import { StatusResponse } from "@/types";
 import { SelectStyle } from "./ui/select-style";
 
@@ -12,9 +12,7 @@ export function CharacterCrafter() {
   const [base64Image, setBase64Image] = useState<string>();
   const [gender, setGender] = useState("female");
   const [runs, setRuns] = useState<StatusResponse[]>([]);
-  const [style, setStyle] = useState<"business" | "casual" | "sporty">(
-    "business",
-  );
+  const [style, setStyle] = useState<string>("business");
 
   const handleGenerateCharacter = async () => {
     if (!base64Image) return;

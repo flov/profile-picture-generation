@@ -3,8 +3,8 @@ import { RadioGroup, RadioGroupItem } from "./radio-group";
 import { Label } from "./label";
 
 interface SelectStyleProps {
-  setStyle: Dispatch<SetStateAction<"business" | "casual" | "sporty">>;
-  style: "business" | "casual" | "sporty";
+  setStyle: Dispatch<SetStateAction<string>>;
+  style: string;
 }
 
 export const SelectStyle: FC<SelectStyleProps> = ({ setStyle, style }) => {
