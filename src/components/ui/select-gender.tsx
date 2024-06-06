@@ -15,9 +15,9 @@ export const SelectGender: FC<SelectGenderProps> = ({ setGender, gender }) => {
       </label>
       <RadioGroup
         className="flex items-center gap-4"
-        defaultValue="female"
+        defaultValue={gender}
         id="gender"
-        onValueChange={(value) => console.log(value)}
+        onValueChange={setGender}
       >
         <Label
           className="flex items-center gap-2 cursor-pointer"

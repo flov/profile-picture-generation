@@ -3,9 +3,13 @@ import Compressor from "compressorjs";
 
 interface UploadImageProps {
   setBase64Image: Dispatch<SetStateAction<string | undefined>>;
+  base64Image: string | undefined;
 }
 
-export const UploadImage = ({ setBase64Image }: UploadImageProps) => {
+export const UploadImage = ({
+  base64Image,
+  setBase64Image,
+}: UploadImageProps) => {
   const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     console.log("file input change");
@@ -40,42 +44,56 @@ export const UploadImage = ({ setBase64Image }: UploadImageProps) => {
   };
 
   const handleFileInputClick = () => {
+    console.log("click");
     fileInputRef.current?.click();
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div>
-      <label className="block font-medium mb-2" htmlFor="image">
-        Upload Image
-      </label>
-      <div className="flex items-center justify-center w-full">
-        <label
-          className="flex flex-col items-center justify-center w-full h-64 bg-gray-50 dark:bg-gray-900 rounded-lg border-2 border-gray-300 dark:border-gray-700 border-dashed cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          htmlFor="image"
+    <>
+      {base64Image ? (
+        <img
+          alt="uploaded image"
+          src={base64Image}
+          className="rounded h-48 object-contain"
           onClick={handleFileInputClick}
-        >
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <UploadIcon className="w-10 h-10 text-gray-400" />
-            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">Click to upload</span>
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG</p>
+        />
+      ) : (
+        <div>
+          <label className="block font-medium mb-2" htmlFor="image">
+            Upload Image
+          </label>
+          <div className="flex items-center justify-center w-full">
+            <label
+              className="flex flex-col items-center justify-center w-full h-64 bg-gray-50 dark:bg-gray-900 rounded-lg border-2 border-gray-300 dark:border-gray-700 border-dashed cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              htmlFor="image"
+              onClick={handleFileInputClick}
+            >
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <UploadIcon className="w-10 h-10 text-gray-400" />
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Click to upload</span>
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  PNG, JPG
+                </p>
+              </div>
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileInputChange}
+                ref={fileInputRef}
+              />
+            </label>
           </div>
-          <input
-            type="file"
-            className="hidden"
-            onChange={handleFileInputChange}
-            ref={fileInputRef}
-          />
-        </label>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
-function UploadIcon(props) {
+function UploadIcon(props: any) {
   return (
     <svg
       {...props}
