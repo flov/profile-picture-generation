@@ -66,10 +66,12 @@ export function CharacterCrafter() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col gap-6">
           <div>
-            <h2 className="text-2xl font-bold mb-2">Create Your Character</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Create Your AI profile picture
+            </h2>
             <p className="text-gray-500 dark:text-gray-400">
               Upload an image, select your gender, and choose a style to
-              generate a unique AI-created character.
+              generate a unique AI-created profile picture.
             </p>
           </div>
           <div className="flex flex-col gap-4">
@@ -86,7 +88,7 @@ export function CharacterCrafter() {
               size="lg"
               onClick={handleGenerateCharacter}
             >
-              Generate Character
+              Generate profile picture
             </Button>
           </div>
         </div>

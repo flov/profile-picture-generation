@@ -12,7 +12,7 @@ export const YourProfilePictures: FC<YourCharactersProps> = ({ runs }) => {
       <div>
         <h2 className="text-2xl font-bold mb-2">Your profile pictures</h2>
         <p className="text-gray-500 dark:text-gray-400">
-          View your previously generated characters.
+          View your previously generated profile pictures.
         </p>
       </div>
       <div className="grid gap-4">
