@@ -8,7 +8,7 @@ import { YourProfilePictures } from "./your-profile-pictures";
 import { StatusResponse } from "@/types";
 import { SelectStyle } from "./ui/select-style";
 
-export function CharacterCrafter() {
+export function ProfilePictureGenerator() {
   const [base64Image, setBase64Image] = useState<string>();
   const [gender, setGender] = useState("female");
   const [runs, setRuns] = useState<StatusResponse[]>([]);

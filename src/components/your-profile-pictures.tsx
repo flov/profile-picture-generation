@@ -1,6 +1,7 @@
 import { StatusResponse } from "@/types";
 import React, { FC, Fragment } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
 interface YourCharactersProps {
   runs: StatusResponse[];
@@ -40,7 +41,9 @@ export const YourProfilePictures: FC<YourCharactersProps> = ({ runs }) => {
                   />
                 </div>
               ) : (
-                <div>failed</div>
+                <Badge className="bg-red-500 text-white">
+                  Failed - please try again
+                </Badge>
               )}
             </Fragment>
           ))}
