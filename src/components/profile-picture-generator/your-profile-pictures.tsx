@@ -1,7 +1,7 @@
 import { StatusResponse } from "@/types";
 import React, { FC, Fragment } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "../ui/skeleton";
 
 interface YourCharactersProps {
   runs: StatusResponse[];

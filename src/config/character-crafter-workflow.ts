@@ -1,15 +1,13 @@
 import { generateRandomSeed } from "@/lib/utils";
-import { base64mask } from "./base64mask";
 
-export const profilePictureWorkflow = (
-  profileImageBase64: string,
-  gender: "male" | "female" | "other",
-  style: string,
+export const characterCrafterWorkflow = (
+  prompt: string,
+  base64Image: string,
 ) => {
   return {
     input: {
       workflow: {
-        28: {
+        "28": {
           inputs: {
             ckpt_name: "dreamshaperXL_sfwLightningDPMSDE.safetensors",
           },
@@ -18,9 +16,8 @@ export const profilePictureWorkflow = (
             title: "Load Checkpoint",
           },
         },
-        33: {
+        "33": {
           inputs: {
-            // generate random seed
             seed: generateRandomSeed(),
             steps: 6,
             cfg: 1.8,
@@ -28,8 +25,8 @@ export const profilePictureWorkflow = (
             scheduler: "normal",
             denoise: 1,
             model: ["155", 0],
-            positive: ["156", 0],
-            negative: ["156", 1],
+            positive: ["34", 0],
+            negative: ["36", 0],
             latent_image: ["41", 0],
           },
           class_type: "KSampler",
@@ -37,9 +34,9 @@ export const profilePictureWorkflow = (
             title: "KSampler",
           },
         },
-        34: {
+        "34": {
           inputs: {
-            text: `portrait picture of a ${gender} person in ${style} clothes`,
+            text: prompt,
             clip: ["28", 1],
           },
           class_type: "CLIPTextEncode",
@@ -47,9 +44,9 @@ export const profilePictureWorkflow = (
             title: "Positive Prompt",
           },
         },
-        36: {
+        "36": {
           inputs: {
-            text: "nsfw, naked, nipples, glasses",
+            text: "nsfw, naked, nipples",
             clip: ["28", 1],
           },
           class_type: "CLIPTextEncode",
@@ -57,7 +54,7 @@ export const profilePictureWorkflow = (
             title: "Negative Prompt",
           },
         },
-        41: {
+        "41": {
           inputs: {
             width: ["111", 0],
             height: ["111", 1],
@@ -68,7 +65,7 @@ export const profilePictureWorkflow = (
             title: "Empty Latent Image",
           },
         },
-        42: {
+        "42": {
           inputs: {
             samples: ["33", 0],
             vae: ["28", 2],
@@ -78,7 +75,7 @@ export const profilePictureWorkflow = (
             title: "VAE Decode",
           },
         },
-        111: {
+        "111": {
           inputs: {
             width: 1024,
             height: 1024,
@@ -92,7 +89,7 @@ export const profilePictureWorkflow = (
             title: "🔳 CR SDXL Aspect Ratio",
           },
         },
-        139: {
+        "139": {
           inputs: {
             filename_prefix: "ComfyUI",
             images: ["146", 0],
@@ -102,7 +99,7 @@ export const profilePictureWorkflow = (
             title: "Save Image",
           },
         },
-        145: {
+        "145": {
           inputs: {
             preset: "PLUS FACE (portraits)",
             model: ["28", 0],
@@ -112,12 +109,12 @@ export const profilePictureWorkflow = (
             title: "IPAdapter Unified Loader",
           },
         },
-        146: {
+        "146": {
           inputs: {
             guide_size: 754,
             guide_size_for: true,
             max_size: 1024,
-            seed: 422049566255731,
+            seed: generateRandomSeed(),
             steps: 6,
             cfg: 2,
             sampler_name: "euler_ancestral",
@@ -153,7 +150,7 @@ export const profilePictureWorkflow = (
             title: "FaceDetailer",
           },
         },
-        148: {
+        "148": {
           inputs: {
             model_name: "bbox/face_yolov8m.pt",
           },
@@ -162,7 +159,7 @@ export const profilePictureWorkflow = (
             title: "UltralyticsDetectorProvider",
           },
         },
-        155: {
+        "155": {
           inputs: {
             weight: 0.7000000000000001,
             weight_type: "ease in-out",
@@ -172,53 +169,20 @@ export const profilePictureWorkflow = (
             embeds_scaling: "V only",
             model: ["145", 0],
             ipadapter: ["145", 1],
-            image: ["164", 0],
+            image: ["163", 0],
           },
           class_type: "IPAdapterAdvanced",
           _meta: {
             title: "IPAdapter Advanced",
           },
         },
-        156: {
+        "163": {
           inputs: {
-            strength: 1,
-            start_percent: 0,
-            end_percent: 1,
-            positive: ["34", 0],
-            negative: ["36", 0],
-            control_net: ["157", 0],
-            image: ["165", 0],
-          },
-          class_type: "ControlNetApplyAdvanced",
-          _meta: {
-            title: "Apply ControlNet (Advanced)",
-          },
-        },
-        157: {
-          inputs: {
-            control_net_name: "OpenPoseXL2.safetensors",
-          },
-          class_type: "ControlNetLoader",
-          _meta: {
-            title: "Load ControlNet Model",
-          },
-        },
-        164: {
-          inputs: {
-            image: profileImageBase64,
+            image: base64Image,
           },
           class_type: "ETN_LoadImageBase64",
           _meta: {
-            title: "Profile Image (Base64)",
-          },
-        },
-        165: {
-          inputs: {
-            image: base64mask,
-          },
-          class_type: "ETN_LoadImageBase64",
-          _meta: {
-            title: "Load Mask Image (Base64)",
+            title: "Load Image (Base64)",
           },
         },
       },

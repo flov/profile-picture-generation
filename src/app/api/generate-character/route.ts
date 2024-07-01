@@ -1,7 +1,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import type { GenerateProfilePicturePayload, RunpodResponse } from "@/types";
-import { profilePictureWorkflow } from "@/config/profile-picture-workflow";
+import { characterCrafterWorkflow } from "@/config/character-crafter-workflow";
+import { styles } from "@/config/prompts";
 
 export const maxDuration = 10; // This function can run for a maximum of 10 seconds
 export const dynamic = "force-dynamic";
@@ -17,15 +18,18 @@ export async function POST(request: Request) {
     const { style, base64Image, gender } =
       (await request.json()) as GenerateProfilePicturePayload;
 
+    const prompt =
+      styles(gender).find((s) => s.label === style)?.prompt || "test";
+
     const res = await fetch(runpodEndpoint, {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(
-        profilePictureWorkflow(base64Image, gender ? gender : "female", style),
-      ),
+      body: JSON.stringify(characterCrafterWorkflow(prompt, base64Image)),
     });
 
     const data: RunpodResponse = await res.json();
+
+    // const data = JSON.stringify(characterCrafterWorkflow(prompt, base64Image));
 
     return Response.json(data, {
       headers: { "Content-Type": "application/json" },
