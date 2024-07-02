@@ -1,6 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { RadioGroup, RadioGroupItem } from "./radio-group";
 import { Label } from "./label";
+import { Style, styles } from "@/config/prompts";
 
 interface SelectCharacterStyleProps {
   setStyle: Dispatch<SetStateAction<string>>;
@@ -13,6 +14,12 @@ export const SelectCharacterStyle: FC<SelectCharacterStyleProps> = ({
 }) => {
   return (
     <div>
+      {styles.map((s: Style) => (
+        <div key={s.label}>
+          <img
+          <h3 className="text-xl font-bold">{s.label}</h3>
+        </div>
+      ))}
       <label className="block font-medium mb-2" htmlFor="style">
         Style
       </label>

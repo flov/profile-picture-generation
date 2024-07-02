@@ -62,8 +62,6 @@ export const CharacterCrafter: FC = () => {
     return () => clearInterval(interval);
   }, [runs]);
 
-  console.log(style);
-
   return (
     <div className="w-full max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -81,6 +79,15 @@ export const CharacterCrafter: FC = () => {
               setBase64Image={setBase64Image}
             />
             <SelectGender setGender={setGender} gender={gender} />
+            <Button
+              disabled={base64Image && gender && style ? false : true}
+              className="w-full"
+              size="lg"
+              onClick={handleGenerateCharacter}
+            >
+              Generate character
+            </Button>
+
             <SelectCharacterStyle setStyle={setStyle} />
 
             <Button

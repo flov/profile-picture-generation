@@ -21,28 +21,31 @@ export const SelectCharacterStyle: FC<SelectCharacterStyleProps> = ({
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {styles("").map((s, index) => (
-        <button
-          key={index}
-          onClick={() => setSelectedIndex(index)}
-          className={`relative overflow-hidden rounded-lg transition-all ${
-            selectedIndex === index
-              ? "ring-2 ring-primary"
-              : "hover:brightness-95 focus:brightness-95"
-          }`}
-        >
-          <Image
-            src={s.image}
-            alt={`Image ${index}`}
-            width={300}
-            height={300}
-            className="object-cover w-full aspect-square"
-          />
-          {selectedIndex === index && (
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-              <CheckIcon className="w-8 h-8 text-white" />
-            </div>
-          )}
-        </button>
+        <div className="flex flex-col align-middle" key={index}>
+          <button
+            key={index}
+            onClick={() => setSelectedIndex(index)}
+            className={`relative overflow-hidden rounded-lg transition-all ${
+              selectedIndex === index
+                ? "ring-2 ring-primary"
+                : "hover:brightness-95 focus:brightness-95"
+            }`}
+          >
+            <Image
+              src={s.image}
+              alt={s.label}
+              width={300}
+              height={300}
+              className="object-cover w-full aspect-square"
+            />
+            {selectedIndex === index && (
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <CheckIcon className="w-8 h-8 text-white" />
+              </div>
+            )}
+            <p className="text-sm">{s.label}</p>
+          </button>
+        </div>
       ))}
     </div>
   );
