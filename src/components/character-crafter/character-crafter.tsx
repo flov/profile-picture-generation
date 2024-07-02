@@ -133,8 +133,8 @@ export const CharacterCrafter: FC = () => {
                       />
                     </div>
                   ) : (
-                    <Badge className="bg-red-500 text-white">
-                      Failed - please try again
+                    <Badge className="bg-red-500 dark:bg-red-700 dark:text-white text-white">
+                      Job Failed - please try again
                     </Badge>
                   )}
                 </Fragment>

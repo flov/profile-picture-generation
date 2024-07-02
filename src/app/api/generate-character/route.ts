@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       (await request.json()) as GenerateProfilePicturePayload;
 
     const prompt =
-      styles(gender).find((s) => s.label === style)?.prompt || "test";
+      styles(gender).find((s) => s.label === style)?.prompt || style;
 
     const res = await fetch(runpodEndpoint, {
       method: "POST",
